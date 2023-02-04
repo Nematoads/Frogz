@@ -27,4 +27,9 @@ public class FrogBase : MonoBehaviour
         targetedRoot.GetComponent<RootBase>().DecrementFrogsAround();
     }
 
+    private void OnMouseDown()
+    {
+        EventBroker.CallSetPossessedFrog(transform);
+        //Debug.Log("selecte: " + name);
+    }
 }
