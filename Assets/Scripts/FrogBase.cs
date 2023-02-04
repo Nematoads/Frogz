@@ -14,7 +14,7 @@ public class FrogBase : MonoBehaviour
     public bool isPossessed = false;
     [HideInInspector]
     public Vector3 moveToPos;
-    bool hasPos = false;
+    bool shouldMovetowardClickedPosition = false;
 
 
     LayerMask WhatCanBeClickedOn;
@@ -34,7 +34,7 @@ public class FrogBase : MonoBehaviour
         }
         else
         {
-            if (hasPos)
+            if (shouldMovetowardClickedPosition)
             {
                 Vector3 dest = new Vector3(moveToPos.x, transform.position.y, moveToPos.z);
                 if (transform.position != dest)
@@ -61,7 +61,8 @@ public class FrogBase : MonoBehaviour
 
     public void MovePossessed(Vector3 destination)
     {
-        hasPos = true;
+        shouldMovetowardClickedPosition = true;
         moveToPos = destination;
     }
+
 }
