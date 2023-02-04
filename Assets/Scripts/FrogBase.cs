@@ -57,11 +57,7 @@ public class FrogBase : MonoBehaviour
 
             possessedTime += Time.deltaTime;
 
-<<<<<<< HEAD
             if (possessedTime >= explosionTimeLimit)
-=======
-            if (possessedTime >= 10)
->>>>>>> ebd8a5ff044c3cb4f62866b1ec077b677b737802
             {
                 //explode
                 Die();
