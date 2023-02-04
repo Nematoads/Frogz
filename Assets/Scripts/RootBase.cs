@@ -40,17 +40,17 @@ public class RootBase : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(frogAround);
+            //Debug.Log(frogAround);
             if(health < 0)
             {
-                Debug.Log("dead");
+                //Debug.Log("dead");
                 Destroy(gameObject);
                 break;
             }
 
             if(frogAround > 0)
             {
-                Debug.Log(health);
+                Debug.Log(transform.name+health.ToString());
                 health -= dmgPerFrog;
             }
             yield return new WaitForSeconds(1);

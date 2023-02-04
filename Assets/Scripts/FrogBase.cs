@@ -22,12 +22,16 @@ public class FrogBase : MonoBehaviour
     bool shouldMovetowardClickedPosition = false;
     float possessedTime = 0;
 
+    public LayerMask frogsLayer;
+
     public SpriteRenderer spriteRenderer;
     public Sprite idleFrog;
     public Sprite possessedFrog;
 
 
     private ExplosionController explosionController;
+
+    public Collider[] nearbyFrogs;
 
     private void Start()
     {
@@ -48,7 +52,8 @@ public class FrogBase : MonoBehaviour
                 float distance = (transform.position - targetedRoot.position).magnitude;
                 if (distance > 1)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, targetedRoot.position, Time.deltaTime * movementSpeed);
+                    Vector3 dest = new Vector3(targetedRoot.position.x, transform.position.y, targetedRoot.position.z);
+                    transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * movementSpeed);
                 }
             }
         }
@@ -60,10 +65,7 @@ public class FrogBase : MonoBehaviour
             if (possessedTime >= explosionTimeLimit)
             {
                 //explode
-                Die();
-                Debug.Log("Destroy");
-                explosionController.Explode(this.transform);
-                Destroy(this.gameObject);
+                Die();     
             }
             
             if (shouldMovetowardClickedPosition)
@@ -97,16 +99,54 @@ public class FrogBase : MonoBehaviour
     
     void Die()
     {
+        nearbyFrogs = Physics.OverlapSphere(transform.position, 10);
+        for (int i = 0; i < nearbyFrogs.Length; i++)
+        {
+            if (nearbyFrogs[i].CompareTag("frog") && nearbyFrogs[i].name != this.name)
+            {
+                nearbyFrogs[i].GetComponent<FrogBase>().Kill();
+            }
+        }
+        //Physics.OverlapSphere(transform.position, 10, frogsLayer, QueryTriggerInteraction.Ignore);
+        //Debug.Log(nearbyFrogs.Length);
+        //Debug.Log("DIE");
         if (!isPossessed && targetedRoot)
         {
             targetedRoot.GetComponent<RootBase>().DecrementFrogsAround();
         }
+        Debug.Log("Destroy");
+        explosionController.Explode(this.transform);
+        Destroy(this.gameObject);
+    }
+
+    public void Kill()
+    {
+        if (!isPossessed && targetedRoot)
+        {
+            targetedRoot.GetComponent<RootBase>().DecrementFrogsAround();
+        }
+        Debug.Log("Destroy");
+        Destroy(this.gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 10);
+        
     }
 
     private void OnMouseDown()
     {
-        EventBroker.CallSetPossessedFrog(transform);
-        //Debug.Log("selecte: " + name);
+        if (!isPossessed)
+        {
+            EventBroker.CallSetPossessedFrog(transform);
+            //Debug.Log("selecte: " + name);
+        }
+        else
+        {
+            Die();
+        }
     }
 
     public void MovePossessed(Vector3 destination)

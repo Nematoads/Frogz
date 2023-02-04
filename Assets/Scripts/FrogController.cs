@@ -13,6 +13,8 @@ public class FrogController : MonoBehaviour
 
     public List<Transform> roots;
 
+    public int numberOfFrogPerRoot = 5;
+
 
     float startPosOffset = 5;
     // Start is called before the first frame update
@@ -20,7 +22,7 @@ public class FrogController : MonoBehaviour
     {
         for (int i = 0; i < roots.Capacity; i++)
         {
-            for (int j = 0; j < 2; j++)
+            for (int j = 0; j < numberOfFrogPerRoot; j++)
             {
                 Transform f = Instantiate(frogPrefab, frogsInHierarchy.transform).transform;
                 float r1 = Random.value * 2 - 1;
