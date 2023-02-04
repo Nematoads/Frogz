@@ -15,6 +15,12 @@ public class RootBase : MonoBehaviour
 
     private void Update()
     {
+        RotateToCamera();
+    }
+    void RotateToCamera()
+    {
+        transform.LookAt(Camera.main.transform);
+        transform.localRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
     }
 
     private void OnTriggerEnter(Collider other)
