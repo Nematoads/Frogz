@@ -3,7 +3,11 @@ guid: b28f4055dbb352f42bc89de48942accb
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - targetedRoot: {instanceID: 0}
+  - spriteRenderer: {instanceID: 0}
+  - idleFrog: {fileID: 21300000, guid: c0859e74c881f49629573664cdd2508c, type: 3}
+  - possessedFrog: {fileID: 21300000, guid: 2af1e2367d2d947058211e090a469ec1, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
