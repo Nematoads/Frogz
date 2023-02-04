@@ -28,6 +28,8 @@ public class FrogBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RotateToCamera();
+
         if (!isPossessed)
         {
             possessedTime = 0;
@@ -60,6 +62,12 @@ public class FrogBase : MonoBehaviour
                 }
             }
         }
+    }
+
+    void RotateToCamera()
+    {
+        transform.LookAt(Camera.main.transform);
+        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
     }
     
     void Die()
