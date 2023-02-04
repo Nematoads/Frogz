@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
             possessed.GetComponent<FrogBase>().isPossessed = true;
             Transform tr = possessed.GetComponent<FrogBase>().targetedRoot;
             if (tr) { tr.GetComponent<RootBase>().DecrementFrogsAround(); }
+
+            possessed.GetComponent<Renderer>().material.color = Color.cyan;
         }
     }
 
