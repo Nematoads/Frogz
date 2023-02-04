@@ -8,7 +8,8 @@ public class FrogBase : MonoBehaviour
     [HideInInspector]
     public Transform targetedRoot;
 
-    public float speed = 2.0f;
+    public float movementSpeed = 2.0f;
+    public float explosionTimeLimit = 10.0f;
 
     [HideInInspector]
     public bool isPossessed = false;
@@ -18,8 +19,6 @@ public class FrogBase : MonoBehaviour
     float possessedTime = 0;
 
     private ExplosionController explosionController;
-
-    LayerMask WhatCanBeClickedOn;
 
     private void Start()
     {
@@ -38,18 +37,21 @@ public class FrogBase : MonoBehaviour
                 float distance = (transform.position - targetedRoot.position).magnitude;
                 if (distance > 1)
                 {
-                    transform.Translate((targetedRoot.position - transform.position).normalized * Time.deltaTime * speed);
+                    transform.position = Vector3.MoveTowards(transform.position, targetedRoot.position, Time.deltaTime * movementSpeed);
                 }
             }
         }
         else
         {
+
             possessedTime += Time.deltaTime;
 
-            if (possessedTime >= 1)
+            if (possessedTime >= explosionTimeLimit)
             {
+                //explode
+                Die();
                 Debug.Log("Destroy");
-                //explosionController.Explode(this.transform);
+                explosionController.Explode(this.transform);
                 Destroy(this.gameObject);
             }
             
@@ -58,7 +60,7 @@ public class FrogBase : MonoBehaviour
                 Vector3 dest = new Vector3(moveToPos.x, transform.position.y, moveToPos.z);
                 if (transform.position != dest)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * speed);
+                    transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * movementSpeed);
                 }
             }
         }
@@ -67,12 +69,12 @@ public class FrogBase : MonoBehaviour
     void RotateToCamera()
     {
         transform.LookAt(Camera.main.transform);
-        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
+        transform.localRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
     }
     
     void Die()
     {
-        if (targetedRoot)
+        if (!isPossessed && targetedRoot)
         {
             targetedRoot.GetComponent<RootBase>().DecrementFrogsAround();
         }

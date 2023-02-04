@@ -20,7 +20,8 @@ public class ExplosionController : MonoBehaviour
 
     public void Explode(Transform transform)
     {
-        var exp = Instantiate<ParticleSystem>(explosion, transform);
+        var exp = Instantiate<ParticleSystem>(explosion);
+        exp.transform.position = transform.position;
         exp.Play();
     }
 }
