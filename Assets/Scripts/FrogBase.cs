@@ -12,12 +12,14 @@ public class FrogBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distance = (transform.position - targetedRoot.position).magnitude;
-        if(distance > 1)
+        if (targetedRoot)
         {
-            transform.Translate((targetedRoot.position - transform.position).normalized * Time.deltaTime * speed);
-        }
-        
+            float distance = (transform.position - targetedRoot.position).magnitude;
+            if (distance > 1)
+            {
+                transform.Translate((targetedRoot.position - transform.position).normalized * Time.deltaTime * speed);
+            }
+        } 
     }
     
     void Die()

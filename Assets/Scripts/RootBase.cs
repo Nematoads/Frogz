@@ -11,7 +11,6 @@ public class RootBase : MonoBehaviour
     void Start()
     {
         StartCoroutine("ReduceHealth");
-        StartCoroutine("die");
     }
 
     private void Update()
@@ -33,8 +32,8 @@ public class RootBase : MonoBehaviour
             if(health < 0)
             {
                 Debug.Log("dead");
-                //Destroy(gameObject);
-                yield return null;
+                Destroy(gameObject);
+                break;
             }
 
             if(frogAround > 0)
