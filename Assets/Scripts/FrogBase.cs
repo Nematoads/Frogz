@@ -84,7 +84,7 @@ public class FrogBase : MonoBehaviour
             spriteRenderer.sprite = idleFrog;
         } else if (isPossessed && spriteRenderer.sprite != possessedFrog)
         {
-            Debug.Log("switch To possessed");
+            //Debug.Log("switch To possessed");
             spriteRenderer.sprite = possessedFrog;
         }
 
@@ -106,7 +106,7 @@ public class FrogBase : MonoBehaviour
     private void OnMouseDown()
     {
         EventBroker.CallSetPossessedFrog(transform);
-        Debug.Log("selecte: " + name);
+        //Debug.Log("selecte: " + name);
     }
 
     public void MovePossessed(Vector3 destination)

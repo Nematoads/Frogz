@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RootBase : MonoBehaviour
 {
-    public float health = 20.0f;
+    public float health = 2.0f;
     public float dmgPerFrog = 1.0f;
     int frogAround = 0;
     // Start is called before the first frame update
@@ -50,7 +50,7 @@ public class RootBase : MonoBehaviour
 
             if(frogAround > 0)
             {
-                //Debug.Log(health);
+                Debug.Log(health);
                 health -= dmgPerFrog;
             }
             yield return new WaitForSeconds(1);
