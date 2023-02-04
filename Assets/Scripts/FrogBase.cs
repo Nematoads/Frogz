@@ -15,7 +15,7 @@ public class FrogBase : MonoBehaviour
     [HideInInspector]
     public Vector3 moveToPos;
     bool shouldMovetowardClickedPosition = false;
-
+    float possessedTime = 0;
 
     LayerMask WhatCanBeClickedOn;
     // Update is called once per frame
@@ -23,6 +23,7 @@ public class FrogBase : MonoBehaviour
     {
         if (!isPossessed)
         {
+            possessedTime = 0;
             if (targetedRoot)
             {
                 float distance = (transform.position - targetedRoot.position).magnitude;
@@ -34,6 +35,14 @@ public class FrogBase : MonoBehaviour
         }
         else
         {
+            possessedTime += Time.deltaTime;
+
+            if (possessedTime >= 5)
+            {
+                Debug.Log("Destroy");
+                Destroy(this.gameObject);
+            }
+            
             if (shouldMovetowardClickedPosition)
             {
                 Vector3 dest = new Vector3(moveToPos.x, transform.position.y, moveToPos.z);
