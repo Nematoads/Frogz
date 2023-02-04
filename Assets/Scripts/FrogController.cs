@@ -28,6 +28,7 @@ public class FrogController : MonoBehaviour
 
                 f.position = roots[i].GetChild(0).position + new Vector3(r1 * startPosOffset, 0, r2 * startPosOffset);
                 f.GetComponent<FrogBase>().targetedRoot = roots[i];
+                f.name = "frog" + (i * j + j).ToString();
                 frogs.Add(f);
             }     
         }   
