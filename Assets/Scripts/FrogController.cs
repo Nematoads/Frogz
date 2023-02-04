@@ -20,7 +20,7 @@ public class FrogController : MonoBehaviour
     {
         for (int i = 0; i < roots.Capacity; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 2; j++)
             {
                 Transform f = Instantiate(frogPrefab, frogsInHierarchy.transform).transform;
                 float r1 = Random.value * 2 - 1;

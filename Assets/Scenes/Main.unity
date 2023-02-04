@@ -435,6 +435,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possessed: {fileID: 0}
+  WhatCanBeClickedOn:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &992115746
 Transform:
   m_ObjectHideFlags: 0
@@ -462,7 +465,7 @@ GameObject:
   - component: {fileID: 1045897725}
   - component: {fileID: 1045897724}
   - component: {fileID: 1045897723}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -718,6 +721,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -6.44
       objectReference: {fileID: 0}
+    - target: {fileID: 8592606664647622555, guid: 855797d14c09e9a4dbc259e0064d2bef,
+        type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 855797d14c09e9a4dbc259e0064d2bef, type: 3}
 --- !u!1001 &3025161579692490978
@@ -796,6 +804,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 8592606664647622555, guid: 855797d14c09e9a4dbc259e0064d2bef,
+        type: 3}
+      propertyPath: health
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 855797d14c09e9a4dbc259e0064d2bef, type: 3}

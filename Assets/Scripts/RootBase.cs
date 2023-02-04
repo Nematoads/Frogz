@@ -24,22 +24,23 @@ public class RootBase : MonoBehaviour
             frogAround++;
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("frog"))
-        {
-            frogAround--;
-            if(frogAround < 0)
-            {
-                frogAround = 0;
-            }
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("frog"))
+    //    {
+    //        frogAround--;
+    //        if(frogAround < 0)
+    //        {
+    //            frogAround = 0;
+    //        }
+    //    }
+    //}
 
     IEnumerator ReduceHealth()
     {
         while (true)
         {
+            Debug.Log(frogAround);
             if(health < 0)
             {
                 Debug.Log("dead");
@@ -49,7 +50,7 @@ public class RootBase : MonoBehaviour
 
             if(frogAround > 0)
             {
-                Debug.Log(health);
+                //Debug.Log(health);
                 health -= dmgPerFrog;
             }
             yield return new WaitForSeconds(1);
