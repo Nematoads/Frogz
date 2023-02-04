@@ -14,6 +14,7 @@ public class FrogBase : MonoBehaviour
 
     public float movementSpeed = 2.0f;
     public float explosionTimeLimit = 10.0f;
+    public float blowUpRadius = 10.0f;
 
     [HideInInspector]
     public bool isPossessed = false;
@@ -99,7 +100,7 @@ public class FrogBase : MonoBehaviour
     
     void Die()
     {
-        nearbyFrogs = Physics.OverlapSphere(transform.position, 10);
+        nearbyFrogs = Physics.OverlapSphere(transform.position, blowUpRadius);
         for (int i = 0; i < nearbyFrogs.Length; i++)
         {
             if (nearbyFrogs[i].CompareTag("frog") && nearbyFrogs[i].name != this.name)
