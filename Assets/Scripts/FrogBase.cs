@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
 
+public enum StatesEnum {
+    Idle,
+    Possessed
+}
 public class FrogBase : MonoBehaviour
 {
     [HideInInspector]
@@ -17,6 +21,11 @@ public class FrogBase : MonoBehaviour
     bool shouldMovetowardClickedPosition = false;
     float possessedTime = 0;
 
+    public SpriteRenderer spriteRenderer;
+    public Sprite idleFrog;
+    public Sprite possessedFrog;
+
+
     private ExplosionController explosionController;
 
     LayerMask WhatCanBeClickedOn;
@@ -24,11 +33,13 @@ public class FrogBase : MonoBehaviour
     private void Start()
     {
         this.explosionController = GetComponent<ExplosionController>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
     // Update is called once per frame
     void Update()
     {
         RotateToCamera();
+        handleSwitchSprites(isPossessed);
 
         if (!isPossessed)
         {
@@ -46,7 +57,7 @@ public class FrogBase : MonoBehaviour
         {
             possessedTime += Time.deltaTime;
 
-            if (possessedTime >= 1)
+            if (possessedTime >= 10)
             {
                 Debug.Log("Destroy");
                 //explosionController.Explode(this.transform);
@@ -64,6 +75,18 @@ public class FrogBase : MonoBehaviour
         }
     }
 
+    void handleSwitchSprites(bool isPossessed)
+    {
+        if (!isPossessed && spriteRenderer.sprite != idleFrog)
+        {
+            spriteRenderer.sprite = idleFrog;
+        } else if (isPossessed && spriteRenderer.sprite != possessedFrog)
+        {
+            Debug.Log("switch To possessed");
+            spriteRenderer.sprite = possessedFrog;
+        }
+
+    }
     void RotateToCamera()
     {
         transform.LookAt(Camera.main.transform);
