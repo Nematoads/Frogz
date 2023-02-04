@@ -17,7 +17,14 @@ public class FrogBase : MonoBehaviour
     bool shouldMovetowardClickedPosition = false;
     float possessedTime = 0;
 
+    private ExplosionController explosionController;
+
     LayerMask WhatCanBeClickedOn;
+
+    private void Start()
+    {
+        this.explosionController = GetComponent<ExplosionController>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -37,9 +44,10 @@ public class FrogBase : MonoBehaviour
         {
             possessedTime += Time.deltaTime;
 
-            if (possessedTime >= 5)
+            if (possessedTime >= 1)
             {
                 Debug.Log("Destroy");
+                //explosionController.Explode(this.transform);
                 Destroy(this.gameObject);
             }
             

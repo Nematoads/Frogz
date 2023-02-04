@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExplosionController : MonoBehaviour
 {
-    public GameObject explosion;
+    public ParticleSystem explosion;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,7 @@ public class ExplosionController : MonoBehaviour
 
     public void Explode(Transform transform)
     {
-        var exp = Instantiate(explosion, transform);
+        var exp = Instantiate<ParticleSystem>(explosion, transform);
+        exp.Play();
     }
 }

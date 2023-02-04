@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1470070684334250805}
   - component: {fileID: 9068958273591302048}
   - component: {fileID: 5209679015134499474}
+  - component: {fileID: -5061527343265079309}
   m_Layer: 0
   m_Name: Frog
   m_TagString: frog
@@ -129,3 +130,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetedRoot: {fileID: 0}
   speed: 2
+  isPossessed: 0
+  moveToPos: {x: 0, y: 0, z: 0}
+--- !u!114 &-5061527343265079309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3818609013647727547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eec335f54de441c0b321429736bdf4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 3866560435334886422, guid: a5b3bf68ab3774b41836fa3e80f0a1c6,
+    type: 3}
