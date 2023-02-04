@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5209679015134499474}
   - component: {fileID: -5061527343265079309}
   - component: {fileID: 1312171279422476339}
+  - component: {fileID: 2544041605472007000}
   m_Layer: 7
   m_Name: Frog
   m_TagString: frog
@@ -80,6 +81,7 @@ MonoBehaviour:
   targetedRoot: {fileID: 0}
   movementSpeed: 5
   explosionTimeLimit: 10
+  blowUpRadius: 10
   isPossessed: 0
   moveToPos: {x: 0, y: 0, z: 0}
   frogsLayer:
@@ -155,3 +157,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2544041605472007000
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3818609013647727547}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 949a2c2be53795b459da595601cf3703, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
