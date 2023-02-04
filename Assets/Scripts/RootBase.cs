@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class RootBase : MonoBehaviour
 {
-    public float health = 5.0f;
+    public float health = 2.0f;
     public float dmgPerFrog = 1.0f;
     int frogAround = 0;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine("ReduceHealth");
+        StartCoroutine("die");
+    }
+
+    private void Update()
+    {
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +33,8 @@ public class RootBase : MonoBehaviour
             if(health < 0)
             {
                 Debug.Log("dead");
-                break;
+                //Destroy(gameObject);
+                yield return null;
             }
 
             if(frogAround > 0)
@@ -48,6 +54,7 @@ public class RootBase : MonoBehaviour
             frogAround = 0;
         }
     }
+
 }
 
 

@@ -14,7 +14,7 @@ public class FrogController : MonoBehaviour
     public List<Transform> roots;
 
 
-    float startPosOffset = 10;
+    float startPosOffset = 5;
     // Start is called before the first frame update
     void Start()
     {
