@@ -15,6 +15,12 @@ public class RootBase : MonoBehaviour
 
     private void Update()
     {
+        RotateToCamera();
+    }
+    void RotateToCamera()
+    {
+        transform.LookAt(Camera.main.transform);
+        transform.localRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,17 +46,17 @@ public class RootBase : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(frogAround);
+            //Debug.Log(frogAround);
             if(health < 0)
             {
-                Debug.Log("dead");
+                //Debug.Log("dead");
                 Destroy(gameObject);
                 break;
             }
 
             if(frogAround > 0)
             {
-                Debug.Log(health);
+                Debug.Log(transform.name+health.ToString());
                 health -= dmgPerFrog;
             }
             yield return new WaitForSeconds(1);
