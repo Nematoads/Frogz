@@ -1,28 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class FrogController : MonoBehaviour
 {
-
+    
     public GameObject frogPrefab;
     public Transform frogsInHierarchy;
-    public List<Transform> frogs = new List<Transform>();
-    public Transform target;
-    public Transform start;
+    [HideInInspector]
+    public List<Transform> frogs;
 
+    public List<Transform> roots;
+
+
+    float startPosOffset = 10;
     // Start is called before the first frame update
     void Start()
     {
-        Transform f = Instantiate(frogPrefab, frogsInHierarchy.transform).transform;
-        f.position = start.position;
-        f.GetComponent<FrogBase>().target = target;
-        frogs.Add(f);     
-    }
+        for (int i = 0; i < roots.Capacity; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                Transform f = Instantiate(frogPrefab, frogsInHierarchy.transform).transform;
+                float r1 = Random.value * 2 - 1;
+                float r2 = Random.value * 2 - 1;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+                f.position = roots[i].GetChild(0).position + new Vector3(r1 * startPosOffset, 0, r2 * startPosOffset);
+                f.GetComponent<FrogBase>().targetedRoot = roots[i];
+                frogs.Add(f);
+            }     
+        }   
     }
 }

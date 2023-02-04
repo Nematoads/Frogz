@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class FrogBase : MonoBehaviour
 {
-    public Transform target;
+    [HideInInspector]
+    public Transform targetedRoot;
+
     public float speed = 2.0f;
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate((target.position - transform.position).normalized * Time.deltaTime * speed);
+        transform.Translate((targetedRoot.position - transform.position).normalized * Time.deltaTime * speed);
     }
+    
+    void Die()
+    {
+        targetedRoot.GetComponent<RootBase>().DecrementFrogsAround();
+    }
+
 }
