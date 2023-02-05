@@ -13,6 +13,12 @@ public class FrogBase : MonoBehaviour
     public Transform targetedRoot;
 
     public float movementSpeed = 2.0f;
+
+    public float MinSpeed = 1.0f;
+    public float MaxSpeed = 7.0f;
+    float speedTimeVariable = 0;
+    public float SpeedIncreaseRate = 0.2f;
+
     public float explosionTimeLimit = 10.0f;
     public float blowUpRadius = 10.0f;
 
@@ -31,9 +37,12 @@ public class FrogBase : MonoBehaviour
 
     private ExplosionController explosionController;
 
+    [HideInInspector]
     public Collider[] nearbyFrogs;
 
     PlayerController pc;
+
+
 
     private void Start()
     {
@@ -45,6 +54,9 @@ public class FrogBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        speedTimeVariable += Time.deltaTime;
+        movementSpeed = Mathf.MoveTowards(MinSpeed, MaxSpeed, speedTimeVariable * SpeedIncreaseRate);
+
         RotateToCamera();
 
         handleSwitchSprites(isPossessed);

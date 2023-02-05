@@ -70,16 +70,18 @@ public class RootBase : MonoBehaviour
 
             if(frogAround > 0)
             {
+                EventBroker.CallSetRaizHealth((int)health);
+
                 health -= dmgPerFrog;
 
                 this.animator.SetBool("isTakingDamage", true);
-
-                EventBroker.CallSetRaizHealth((int)health);
-
                 //this.animator.SetBool("", false);
 
             }
-            yield return new WaitForSeconds(dmgInterval);
+            if (health >= 0)
+            {
+                yield return new WaitForSeconds(dmgInterval);
+            }
         }
         yield return null;
     }

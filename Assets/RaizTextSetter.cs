@@ -8,10 +8,11 @@ public class RaizTextSetter : MonoBehaviour
 
     public Text healthText;
 
-    private void Start()
+    private void Awake()
     {
         EventBroker.setRaizHealth += setHealth;
     }
+
     public void setHealth(int health)
     {
         healthText.text = health.ToString();
