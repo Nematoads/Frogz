@@ -8,10 +8,14 @@ public class RootBase : MonoBehaviour
     public float dmgPerFrog = 1.0f;
     public float dmgInterval = 1.0f;
     int frogAround = 0;
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine("ReduceHealth");
+        this.animator = GetComponent<Animator>();
+        EventBroker.setPossessed += Attack;
     }
 
     private void Update()
@@ -43,6 +47,13 @@ public class RootBase : MonoBehaviour
     //    }
     //}
 
+
+
+    public void Attack(Transform p)
+    {
+        this.animator.SetTrigger("sporeAttack");
+    }
+
     IEnumerator ReduceHealth()
     {
         while (true)
@@ -57,6 +68,7 @@ public class RootBase : MonoBehaviour
             if(frogAround > 0)
             {
                 health -= dmgPerFrog;
+                this.animator.SetBool("", false);
             }
             yield return new WaitForSeconds(dmgInterval);
         }
@@ -69,6 +81,11 @@ public class RootBase : MonoBehaviour
         {
             frogAround = 0;
         }
+    }
+
+    private void OnDeDestroy()
+    {
+        EventBroker.setPossessed -= Attack;
     }
 
 }
