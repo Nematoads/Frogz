@@ -1,6 +1,9 @@
 name: Build project
 
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+      - tapiiri
 
 jobs:
   buildForAllSupportedPlatforms:
@@ -22,6 +25,8 @@ jobs:
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
       - uses: game-ci/unity-builder@v2
+        with:
+          customImage: 'unityci/editor:2022.1.17f1-webgl-1'
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
