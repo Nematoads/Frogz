@@ -106,12 +106,19 @@ public class FrogBase : MonoBehaviour
         this.animator.SetBool("isPuddle", true);
 
     }
+
+    private void OnDestroy()
+    {
+        Destroy(this.gameObject);
+    }
+
     void Die()
     {
         this.animator.SetBool("IsExploding", true);
 
+        Invoke("TurnToPuddle", 1);
+        Invoke("OnDestroy", 4);
 
-        Invoke("TurnToPuddle", 3);
         nearbyFrogs = Physics.OverlapSphere(transform.position, blowUpRadius);
         for (int i = 0; i < nearbyFrogs.Length; i++)
         {
@@ -129,7 +136,6 @@ public class FrogBase : MonoBehaviour
         }
         
         explosionController.Explode(this.transform);
-        //Destroy(this.gameObject);
     }
 
     public void Kill()
@@ -138,7 +144,6 @@ public class FrogBase : MonoBehaviour
         {
             targetedRoot.GetComponent<RootBase>().DecrementFrogsAround();
         }
-        //Debug.Log("Destroy");
         Destroy(this.gameObject);
     }
 
