@@ -95,7 +95,7 @@ public class FrogBase : MonoBehaviour
     void RotateToCamera()
     {
         transform.LookAt(Camera.main.transform);
-        transform.localRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
+        //transform.localRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
     }
     
     void Die()
@@ -115,7 +115,7 @@ public class FrogBase : MonoBehaviour
         {
             targetedRoot.GetComponent<RootBase>().DecrementFrogsAround();
         }
-        Debug.Log("Destroy");
+        
         explosionController.Explode(this.transform);
         Destroy(this.gameObject);
     }
@@ -126,7 +126,7 @@ public class FrogBase : MonoBehaviour
         {
             targetedRoot.GetComponent<RootBase>().DecrementFrogsAround();
         }
-        Debug.Log("Destroy");
+        //Debug.Log("Destroy");
         Destroy(this.gameObject);
     }
 
