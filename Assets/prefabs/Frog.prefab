@@ -79,9 +79,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetedRoot: {fileID: 0}
-  movementSpeed: 5
-  explosionTimeLimit: 10
-  blowUpRadius: 10
+  movementSpeed: 2
+  explosionTimeLimit: 0.2
+  blowUpRadius: 2
   isPossessed: 0
   moveToPos: {x: 0, y: 0, z: 0}
   frogsLayer:

@@ -6,13 +6,21 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    
+    [HideInInspector]
     public Transform possessed;
     public LayerMask WhatCanBeClickedOn;
+
+    [HideInInspector]
+    public bool isOnCoolDown = false;
+    public float coolDownTime = 3;
+    FrogController fc;
+
     // Start is called before the first frame update
     void Start()
     {
         EventBroker.setPossessed += setPossessed;
+        EventBroker.goOnCoolDown += GoOnCoolDown;
+        fc = FindObjectOfType<FrogController>();
     }
 
     // Update is called once per frame
@@ -38,13 +46,32 @@ public class PlayerController : MonoBehaviour
             Transform tr = possessed.GetComponent<FrogBase>().targetedRoot;
             if (tr) { tr.GetComponent<RootBase>().DecrementFrogsAround(); }
 
-            // possessed.GetComponent<Renderer>().material.color = Color.cyan;
+            fc.AddRayCastIgnoreLayer(possessed);
+           // possessed.GetComponent<Renderer>().material.color = Color.cyan;
         }
+    }
+
+    void GoOnCoolDown()
+    {
+        Debug.Log("GoOnCoolDown");
+        isOnCoolDown = true;
+        fc.RemoveRayCastIgnoreLayer(possessed);
+        StartCoroutine("CountCoolDownTime");
+    }
+
+    IEnumerator CountCoolDownTime()
+    {
+        Debug.Log("GO IN");
+        yield return new WaitForSeconds(coolDownTime);
+        Debug.Log("DONE");
+        isOnCoolDown = false;
+        yield return null;
     }
 
     private void OnDestroy()
     {
         EventBroker.setPossessed -= setPossessed;
+        EventBroker.goOnCoolDown -= GoOnCoolDown;
     }
 
 

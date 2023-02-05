@@ -14,6 +14,9 @@ public class RootBase : MonoBehaviour
     void Start()
     {
         StartCoroutine("ReduceHealth");
+
+        EventBroker.CallSetRaizHealth((int) health);
+
         this.animator = GetComponent<Animator>();
         EventBroker.setPossessed += Attack;
     }
@@ -68,7 +71,13 @@ public class RootBase : MonoBehaviour
             if(frogAround > 0)
             {
                 health -= dmgPerFrog;
+
                 this.animator.SetBool("isTakingDamage", true);
+
+                EventBroker.CallSetRaizHealth((int)health);
+
+                //this.animator.SetBool("", false);
+
             }
             yield return new WaitForSeconds(dmgInterval);
         }

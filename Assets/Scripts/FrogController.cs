@@ -22,6 +22,8 @@ public class FrogController : MonoBehaviour
 
     int frogId = 0;
 
+    int currentLayerForSpawn = 0;
+
     private void Start()
     {
         rootCount = roots.Count;
@@ -43,6 +45,7 @@ public class FrogController : MonoBehaviour
                 f.position = roots[rootIndex].GetChild(0).position + new Vector3(Mathf.Cos(r2)*r1, 0, Mathf.Sin(r2) * r1);
                 f.GetComponent<FrogBase>().targetedRoot = roots[rootIndex];
                 f.name = "frog" + (rootIndex * frogId + frogId).ToString();
+                f.gameObject.layer = currentLayerForSpawn;
                 frogId++;
                 frogs.Add(f);
             }
@@ -56,6 +59,30 @@ public class FrogController : MonoBehaviour
         {
             //gameOver
             EventBroker.CallGameOver();
+        }
+    }
+
+    public void AddRayCastIgnoreLayer(Transform possessed)
+    {
+        currentLayerForSpawn = 2; //IgnoreRayCast
+        for (int i = 0; i < frogs.Count; i++)
+        {
+            if (frogs[i] && frogs[i].name != possessed.name)
+            {
+                frogs[i].gameObject.layer = currentLayerForSpawn;
+            }
+        }
+    }
+
+    public void RemoveRayCastIgnoreLayer(Transform possessed)
+    {
+        currentLayerForSpawn = 0;//Default
+        for (int i = 0; i < frogs.Count; i++)
+        {
+            if (frogs[i])
+            {
+                frogs[i].gameObject.layer = currentLayerForSpawn;
+            }
         }
     }
 
