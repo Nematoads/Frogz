@@ -103,6 +103,7 @@ public class FrogBase : MonoBehaviour
     
     void Die()
     {
+        //Only possessd ones come to this function
         EventBroker.CallGoOnCoolDown();
         nearbyFrogs = Physics.OverlapSphere(transform.position, blowUpRadius);
         for (int i = 0; i < nearbyFrogs.Length; i++)
