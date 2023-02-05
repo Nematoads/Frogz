@@ -1,22 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    
+    public Text scoreText;
 
-    void Start()
+    float time;
+
+    private void Update()
     {
-        
+        time += Time.deltaTime;
+        scoreText.text = ((int)time).ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
 
-    
 }
