@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class FrogController : MonoBehaviour
@@ -24,6 +25,11 @@ public class FrogController : MonoBehaviour
 
     int currentLayerForSpawn = 0;
 
+    public float SpawnRateSpeed = 1;
+    public float MinSpawnRate = 4;
+    public float MaxSpawnRate = 0.2f;
+    float timeIntervalTimeVariable = 0;
+
     private void Start()
     {
         rootCount = roots.Count;
@@ -33,7 +39,11 @@ public class FrogController : MonoBehaviour
     private void Update()
     {
         time += Time.deltaTime;
-        if (time > spawnTimeInterval)
+        //if (time > spawnTimeInterval)
+        timeIntervalTimeVariable += Time.deltaTime;
+        float ft = Mathf.MoveTowards(MinSpawnRate, MaxSpawnRate, timeIntervalTimeVariable * SpawnRateSpeed);
+        Debug.Log(ft);
+        if (time > ft)
         {
             time = 0;
             int rootIndex = Random.Range(0, roots.Capacity);
@@ -50,6 +60,7 @@ public class FrogController : MonoBehaviour
                 frogs.Add(f);
             }
         }
+
     }
 
     void OneRootIsDead()
