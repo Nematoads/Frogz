@@ -28,8 +28,6 @@ public class UIManager : MonoBehaviour
            yield return new WaitForSeconds(1);
            this.IncreaseScore();
         }
-
-        yield return null;
     }
 
     private void IncreaseScore() {
