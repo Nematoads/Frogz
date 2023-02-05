@@ -101,8 +101,8 @@ public class FrogBase : MonoBehaviour
 
     void TurnToPuddle()
     {
-        this.animator.SetBool("isPuddle", true);
-        Instantiate(this.puddle, this.transform);
+        //this.animator.SetBool("isPuddle", true);
+        //
         //Destroy(this.gameObject);
     }
 
@@ -115,8 +115,8 @@ public class FrogBase : MonoBehaviour
     {
         this.animator.SetBool("IsExploding", true);
 
-        Invoke("TurnToPuddle", 1);
-        Invoke("DestroyContainer", 2);
+        //Instantiate(this.puddle, this.transform);
+        Invoke("DestroyContainer", 1);
 
         nearbyFrogs = Physics.OverlapSphere(transform.position, blowUpRadius);
         for (int i = 0; i < nearbyFrogs.Length; i++)
