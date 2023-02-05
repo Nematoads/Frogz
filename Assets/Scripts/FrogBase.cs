@@ -26,8 +26,7 @@ public class FrogBase : MonoBehaviour
     public LayerMask frogsLayer;
 
     private SpriteRenderer spriteRenderer;
-    public Sprite idleFrog;
-    public Sprite possessedFrog;
+    public GameObject puddle;
     private Animator animator;
 
     private ExplosionController explosionController;
@@ -44,11 +43,6 @@ public class FrogBase : MonoBehaviour
     void Update()
     {
         RotateToCamera();
-
-        if (animator.GetBool("isPuddle") || animator.GetBool("IsExploding"))
-        {
-            return;
-        }
 
         handleSwitchSprites(isPossessed);
 
@@ -93,11 +87,9 @@ public class FrogBase : MonoBehaviour
         {
             this.animator.SetBool("isPossessed", false);
 
-            spriteRenderer.sprite = idleFrog;
         } else if (isPossessed && !this.animator.GetBool("isPossessed"))
         {
             this.animator.SetBool("isPossessed", true);
-            spriteRenderer.sprite = possessedFrog;
         }
 
     }
@@ -110,10 +102,11 @@ public class FrogBase : MonoBehaviour
     void TurnToPuddle()
     {
         this.animator.SetBool("isPuddle", true);
-
+        Instantiate(this.puddle, this.transform);
+        //Destroy(this.gameObject);
     }
 
-    private void OnDestroy()
+    private void DestroyContainer()
     {
         Destroy(this.gameObject);
     }
@@ -123,7 +116,7 @@ public class FrogBase : MonoBehaviour
         this.animator.SetBool("IsExploding", true);
 
         Invoke("TurnToPuddle", 1);
-        Invoke("OnDestroy", 4);
+        Invoke("DestroyContainer", 2);
 
         nearbyFrogs = Physics.OverlapSphere(transform.position, blowUpRadius);
         for (int i = 0; i < nearbyFrogs.Length; i++)
@@ -175,6 +168,11 @@ public class FrogBase : MonoBehaviour
 
     public void MovePossessed(Vector3 destination)
     {
+        if (animator.GetBool("isPuddle") || animator.GetBool("IsExploding"))
+        {
+            return;
+        }
+
         shouldMovetowardClickedPosition = true;
         moveToPos = destination;
     }

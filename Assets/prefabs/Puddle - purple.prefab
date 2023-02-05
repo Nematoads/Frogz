@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7358836235085723680}
   - component: {fileID: 4464615498402233835}
+  - component: {fileID: 8218486982616068744}
   m_Layer: 0
   m_Name: Puddle - purple
   m_TagString: Untagged
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8218486982616068744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049040891367396621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42228fd1e42f549079a73c4944e56f72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
