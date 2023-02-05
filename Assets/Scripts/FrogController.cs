@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.Port;
-using static UnityEngine.GraphicsBuffer;
 
 public class FrogController : MonoBehaviour
 {
@@ -13,6 +11,7 @@ public class FrogController : MonoBehaviour
     public List<Transform> frogs;
 
     public List<Transform> roots;
+    int rootCount = 0;
 
     //public int numberOfFrogPerRoot = 5;
     public float spawnPosOffset_upper = 5;
@@ -22,23 +21,11 @@ public class FrogController : MonoBehaviour
     float time = 0;
 
     int frogId = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //for (int i = 0; i < roots.Capacity; i++)
-        //{
-        //    for (int j = 0; j < numberOfFrogPerRoot; j++)
-        //    {
-        //        Transform f = Instantiate(frogPrefab, frogsInHierarchy.transform).transform;
-        //        float r1 = Random.value * 2 - 1;
-        //        float r2 = Random.value * 2 - 1;
 
-        //        f.position = roots[i].GetChild(0).position + new Vector3(r1 * spawnPosOffset, 0, r2 * spawnPosOffset);
-        //        f.GetComponent<FrogBase>().targetedRoot = roots[i];
-        //        f.name = "frog" + (i * j + j).ToString();
-        //        frogs.Add(f);
-        //    }     
-        //}   
+    private void Start()
+    {
+        rootCount = roots.Count;
+        EventBroker.rootdied += OneRootIsDead;
     }
 
     private void Update()
@@ -60,5 +47,20 @@ public class FrogController : MonoBehaviour
                 frogs.Add(f);
             }
         }
+    }
+
+    void OneRootIsDead()
+    {
+        rootCount--;
+        if(rootCount <= 0)
+        {
+            //gameOver
+            EventBroker.CallGameOver();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        EventBroker.rootdied -= OneRootIsDead;
     }
 }

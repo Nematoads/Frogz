@@ -6,6 +6,7 @@ public class RootBase : MonoBehaviour
 {
     public float health = 2.0f;
     public float dmgPerFrog = 1.0f;
+    public float dmgInterval = 1.0f;
     int frogAround = 0;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class RootBase : MonoBehaviour
     void RotateToCamera()
     {
         transform.LookAt(Camera.main.transform);
-        transform.localRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
+        //transform.localRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,20 +47,18 @@ public class RootBase : MonoBehaviour
     {
         while (true)
         {
-            //Debug.Log(frogAround);
             if(health < 0)
             {
-                //Debug.Log("dead");
+                EventBroker.CallRootdied();
                 Destroy(gameObject);
                 break;
             }
 
             if(frogAround > 0)
             {
-                Debug.Log(transform.name+health.ToString());
                 health -= dmgPerFrog;
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(dmgInterval);
         }
         yield return null;
     }
