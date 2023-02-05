@@ -25,10 +25,10 @@ public class FrogBase : MonoBehaviour
 
     public LayerMask frogsLayer;
 
-    public SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
     public Sprite idleFrog;
     public Sprite possessedFrog;
-
+    private Animator animator;
 
     private ExplosionController explosionController;
 
@@ -38,6 +38,7 @@ public class FrogBase : MonoBehaviour
     {
         this.explosionController = GetComponent<ExplosionController>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        this.animator = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
@@ -82,12 +83,14 @@ public class FrogBase : MonoBehaviour
 
     void handleSwitchSprites(bool isPossessed)
     {
-        if (!isPossessed && spriteRenderer.sprite != idleFrog)
+        if (!isPossessed && this.animator.GetBool("isPossessed"))
         {
+            this.animator.SetBool("isPossessed", false);
+
             spriteRenderer.sprite = idleFrog;
-        } else if (isPossessed && spriteRenderer.sprite != possessedFrog)
+        } else if (isPossessed && !this.animator.GetBool("isPossessed"))
         {
-            //Debug.Log("switch To possessed");
+            this.animator.SetBool("isPossessed", true);
             spriteRenderer.sprite = possessedFrog;
         }
 
@@ -97,9 +100,18 @@ public class FrogBase : MonoBehaviour
         transform.LookAt(Camera.main.transform);
         //transform.localRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
     }
-    
+
+    void TurnToPuddle()
+    {
+        this.animator.SetBool("isPuddle", true);
+
+    }
     void Die()
     {
+        this.animator.SetBool("IsExploding", true);
+
+
+        Invoke("TurnToPuddle", 3);
         nearbyFrogs = Physics.OverlapSphere(transform.position, blowUpRadius);
         for (int i = 0; i < nearbyFrogs.Length; i++)
         {
@@ -117,7 +129,7 @@ public class FrogBase : MonoBehaviour
         }
         
         explosionController.Explode(this.transform);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 
     public void Kill()
