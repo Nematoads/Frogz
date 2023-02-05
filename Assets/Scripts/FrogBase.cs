@@ -44,7 +44,11 @@ public class FrogBase : MonoBehaviour
     void Update()
     {
         RotateToCamera();
-        handleSwitchSprites(isPossessed);
+
+        if (animator.GetBool("isPuddle") || animator.GetBool("IsExploding"))
+        {
+            return;
+        }
 
         if (!isPossessed)
         {
@@ -81,20 +85,6 @@ public class FrogBase : MonoBehaviour
         }
     }
 
-    void handleSwitchSprites(bool isPossessed)
-    {
-        if (!isPossessed && this.animator.GetBool("isPossessed"))
-        {
-            this.animator.SetBool("isPossessed", false);
-
-            spriteRenderer.sprite = idleFrog;
-        } else if (isPossessed && !this.animator.GetBool("isPossessed"))
-        {
-            this.animator.SetBool("isPossessed", true);
-            spriteRenderer.sprite = possessedFrog;
-        }
-
-    }
     void RotateToCamera()
     {
         transform.LookAt(Camera.main.transform);
@@ -168,7 +158,7 @@ public class FrogBase : MonoBehaviour
     }
 
     public void MovePossessed(Vector3 destination)
-    {
+    { 
         shouldMovetowardClickedPosition = true;
         moveToPos = destination;
     }
