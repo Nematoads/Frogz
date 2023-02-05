@@ -6,14 +6,19 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    
+    [HideInInspector]
     public Transform possessed;
     public LayerMask WhatCanBeClickedOn;
+
+    [HideInInspector]
+    public bool isOnCoolDown = false;
+    public float coolDownTime = 3;
 
     // Start is called before the first frame update
     void Start()
     {
         EventBroker.setPossessed += setPossessed;
+        EventBroker.goOnCoolDown += GoOnCoolDown;
     }
 
     // Update is called once per frame
@@ -43,9 +48,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void GoOnCoolDown()
+    {
+        Debug.Log("GoOnCoolDown");
+        isOnCoolDown = true;
+        StartCoroutine("CountCoolDownTime");
+    }
+
+    IEnumerator CountCoolDownTime()
+    {
+        Debug.Log("GO IN");
+        yield return new WaitForSeconds(coolDownTime);
+        Debug.Log("DONE");
+        isOnCoolDown = false;
+        yield return null;
+    }
+
     private void OnDestroy()
     {
         EventBroker.setPossessed -= setPossessed;
+        EventBroker.goOnCoolDown -= GoOnCoolDown;
     }
 
 

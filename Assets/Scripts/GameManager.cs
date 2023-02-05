@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject ReplayInGameButton;
 
+
     private void Start()
     {
         EventBroker.gameOver += ShowGameOverScreen;

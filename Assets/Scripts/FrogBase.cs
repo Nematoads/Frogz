@@ -34,8 +34,11 @@ public class FrogBase : MonoBehaviour
 
     public Collider[] nearbyFrogs;
 
+    PlayerController pc;
+
     private void Start()
     {
+        pc = GameObject.FindObjectOfType<PlayerController>();
         this.explosionController = GetComponent<ExplosionController>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
@@ -100,6 +103,7 @@ public class FrogBase : MonoBehaviour
     
     void Die()
     {
+        EventBroker.CallGoOnCoolDown();
         nearbyFrogs = Physics.OverlapSphere(transform.position, blowUpRadius);
         for (int i = 0; i < nearbyFrogs.Length; i++)
         {
@@ -139,15 +143,23 @@ public class FrogBase : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!isPossessed)
-        {
+        if (!pc.isOnCoolDown && !isPossessed) {
+            Debug.Log("OnMouseDown");
             EventBroker.CallSetPossessedFrog(transform);
-            //Debug.Log("selecte: " + name);
         }
-        else
+        else if (isPossessed)
         {
             Die();
         }
+        //if (!isPossessed)
+        //{
+        //    EventBroker.CallSetPossessedFrog(transform);
+        //    //Debug.Log("selecte: " + name);
+        //}
+        //else
+        //{
+        //    Die();
+        //}
     }
 
     public void MovePossessed(Vector3 destination)
