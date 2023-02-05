@@ -83,6 +83,11 @@ public class RootBase : MonoBehaviour
         }
     }
 
+    private void OnDeDestroy()
+    {
+        EventBroker.setPossessed -= Attack;
+    }
+
 }
 
 
