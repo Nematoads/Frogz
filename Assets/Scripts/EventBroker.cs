@@ -4,9 +4,8 @@ using UnityEngine;
 public class EventBroker
 {
     public static event Action<Transform> setPossessed;
-    public static Action gameOver;
-    public static Action rootdied;
-    public static Action goOnCoolDown;
+    public static Action gameOver, rootdied, goOnCoolDown ;
+    public static event Action<int> setRaizHealth;
     public static void CallSetPossessedFrog(Transform frog)
     {
         setPossessed?.Invoke(frog);
@@ -26,4 +25,10 @@ public class EventBroker
     {
         goOnCoolDown?.Invoke();
     }
+
+    public static void CallSetRaizHealth(int h)
+    {
+        setRaizHealth?.Invoke(h);
+    }
+
 }

@@ -12,6 +12,7 @@ public class RootBase : MonoBehaviour
     void Start()
     {
         StartCoroutine("ReduceHealth");
+        EventBroker.CallSetRaizHealth((int) health);
     }
 
     private void Update()
@@ -57,6 +58,7 @@ public class RootBase : MonoBehaviour
             if(frogAround > 0)
             {
                 health -= dmgPerFrog;
+                EventBroker.CallSetRaizHealth((int)health);
             }
             yield return new WaitForSeconds(dmgInterval);
         }
