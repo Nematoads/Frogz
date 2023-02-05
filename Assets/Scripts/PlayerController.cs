@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
     void GoOnCoolDown()
     {
+        possessed = null;
         Debug.Log("GoOnCoolDown");
         isOnCoolDown = true;
         fc.RemoveRayCastIgnoreLayer(possessed);
