@@ -82,6 +82,10 @@ public class RootBase : MonoBehaviour
             {
                 yield return new WaitForSeconds(dmgInterval);
             }
+            else
+            {
+                yield return null;
+            }
         }
         yield return null;
     }

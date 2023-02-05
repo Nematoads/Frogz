@@ -138,6 +138,38 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadMainLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 2101529736, guid: bed686ddb253b704fa1192d518791fc3, type: 3}
+      propertyPath: m_Color.b
+      value: 0.22352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101529736, guid: bed686ddb253b704fa1192d518791fc3, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101529736, guid: bed686ddb253b704fa1192d518791fc3, type: 3}
+      propertyPath: m_Color.r
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248098581574790850, guid: bed686ddb253b704fa1192d518791fc3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248098581574790850, guid: bed686ddb253b704fa1192d518791fc3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.3803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248098581574790850, guid: bed686ddb253b704fa1192d518791fc3,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.23529413
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192815010967272790, guid: bed686ddb253b704fa1192d518791fc3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4429828496250480877, guid: bed686ddb253b704fa1192d518791fc3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -147,6 +179,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289854527758330349, guid: bed686ddb253b704fa1192d518791fc3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289854527758330349, guid: bed686ddb253b704fa1192d518791fc3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.36862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289854527758330349, guid: bed686ddb253b704fa1192d518791fc3,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.23529413
       objectReference: {fileID: 0}
     - target: {fileID: 5289854527758330349, guid: bed686ddb253b704fa1192d518791fc3,
         type: 3}
@@ -921,7 +968,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 766b139172bf15648a1bdddd8ec2b99d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
