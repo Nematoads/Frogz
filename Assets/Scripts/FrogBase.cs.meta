@@ -5,9 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - targetedRoot: {instanceID: 0}
-  - spriteRenderer: {instanceID: 0}
-  - idleFrog: {fileID: 21300000, guid: c0859e74c881f49629573664cdd2508c, type: 3}
-  - possessedFrog: {fileID: 21300000, guid: 2af1e2367d2d947058211e090a469ec1, type: 3}
+  - puddle: {fileID: 3049040891367396621, guid: c6d61ae32712c1644aa2be155429055f,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

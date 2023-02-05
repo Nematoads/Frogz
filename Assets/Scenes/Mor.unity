@@ -1144,7 +1144,7 @@ MonoBehaviour:
   - {fileID: 1136155855}
   spawnPosOffset_upper: 10
   spawnPosOffset_lower: 10
-  spawnTimeInterval: 0.05
+  spawnTimeInterval: 0.2
 --- !u!4 &1765631505
 Transform:
   m_ObjectHideFlags: 0

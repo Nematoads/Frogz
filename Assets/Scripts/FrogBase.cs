@@ -25,10 +25,9 @@ public class FrogBase : MonoBehaviour
 
     public LayerMask frogsLayer;
 
-    public SpriteRenderer spriteRenderer;
-    public Sprite idleFrog;
-    public Sprite possessedFrog;
-
+    private SpriteRenderer spriteRenderer;
+    public GameObject puddle;
+    private Animator animator;
 
     private ExplosionController explosionController;
 
@@ -41,11 +40,13 @@ public class FrogBase : MonoBehaviour
         pc = GameObject.FindObjectOfType<PlayerController>();
         this.explosionController = GetComponent<ExplosionController>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        this.animator = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
     {
         RotateToCamera();
+
         handleSwitchSprites(isPossessed);
 
         if (!isPossessed)
@@ -85,13 +86,13 @@ public class FrogBase : MonoBehaviour
 
     void handleSwitchSprites(bool isPossessed)
     {
-        if (!isPossessed && spriteRenderer.sprite != idleFrog)
+        if (!isPossessed && this.animator.GetBool("isPossessed"))
         {
-            spriteRenderer.sprite = idleFrog;
-        } else if (isPossessed && spriteRenderer.sprite != possessedFrog)
+            this.animator.SetBool("isPossessed", false);
+
+        } else if (isPossessed && !this.animator.GetBool("isPossessed"))
         {
-            //Debug.Log("switch To possessed");
-            spriteRenderer.sprite = possessedFrog;
+            this.animator.SetBool("isPossessed", true);
         }
 
     }
@@ -100,11 +101,28 @@ public class FrogBase : MonoBehaviour
         transform.LookAt(Camera.main.transform);
         //transform.localRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0);
     }
-    
+
+    void TurnToPuddle()
+    {
+        //this.animator.SetBool("isPuddle", true);
+        //
+        //Destroy(this.gameObject);
+    }
+
+    private void DestroyContainer()
+    {
+        Destroy(this.gameObject);
+    }
+
     void Die()
     {
         //Only possessd ones come to this function
         EventBroker.CallGoOnCoolDown();
+        this.animator.SetBool("IsExploding", true);
+
+        //Instantiate(this.puddle, this.transform);
+        Invoke("DestroyContainer", 1);
+
         nearbyFrogs = Physics.OverlapSphere(transform.position, blowUpRadius);
         for (int i = 0; i < nearbyFrogs.Length; i++)
         {
@@ -122,7 +140,6 @@ public class FrogBase : MonoBehaviour
         }
         
         explosionController.Explode(this.transform);
-        Destroy(this.gameObject);
     }
 
     public void Kill()
@@ -131,7 +148,6 @@ public class FrogBase : MonoBehaviour
         {
             targetedRoot.GetComponent<RootBase>().DecrementFrogsAround();
         }
-        //Debug.Log("Destroy");
         Destroy(this.gameObject);
     }
 
@@ -165,6 +181,11 @@ public class FrogBase : MonoBehaviour
 
     public void MovePossessed(Vector3 destination)
     {
+        if (animator.GetBool("isPuddle") || animator.GetBool("IsExploding"))
+        {
+            return;
+        }
+
         shouldMovetowardClickedPosition = true;
         moveToPos = destination;
     }
