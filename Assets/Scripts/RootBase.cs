@@ -8,10 +8,13 @@ public class RootBase : MonoBehaviour
     public float dmgPerFrog = 1.0f;
     public float dmgInterval = 1.0f;
     int frogAround = 0;
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine("ReduceHealth");
+        this.animator = GetComponent<Animator>();
     }
 
     private void Update()
