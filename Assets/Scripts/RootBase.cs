@@ -68,7 +68,7 @@ public class RootBase : MonoBehaviour
             if(frogAround > 0)
             {
                 health -= dmgPerFrog;
-                this.animator.SetBool("", false);
+                this.animator.SetBool("isTakingDamage", true);
             }
             yield return new WaitForSeconds(dmgInterval);
         }
@@ -83,7 +83,7 @@ public class RootBase : MonoBehaviour
         }
     }
 
-    private void OnDeDestroy()
+    private void OnDestroy()
     {
         EventBroker.setPossessed -= Attack;
     }
