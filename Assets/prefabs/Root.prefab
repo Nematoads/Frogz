@@ -62,9 +62,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6b8a0832ced0244aa2fae3758db77d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
   dmgPerFrog: 1
-  dmgInterval: 1
+  dmgInterval: 0.1
 --- !u!212 &7094990005510795285
 SpriteRenderer:
   m_ObjectHideFlags: 0
